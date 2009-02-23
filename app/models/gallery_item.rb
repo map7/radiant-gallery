@@ -12,7 +12,7 @@ class GalleryItem < ActiveRecord::Base
     end
   end
   
-  attr_accessible :name, :description, :uploaded_data, :keywords
+  attr_accessible :name, :description
   
   has_attachment :storage => :file_system,
     :path_prefix => Radiant::Config["gallery.path_prefix"],
@@ -41,10 +41,14 @@ class GalleryItem < ActiveRecord::Base
     item.generate_default_thumbnails if item.parent.nil?
   end
   
-  before_thumbnail_saved do |item, thumbnail|
-    item = thumbnail.parent
-    thumbnail.gallery_id = item.gallery_id
-  end                                              
+  # before_thumbnail_saved do |item, thumbnail|
+  #   item = thumbnail.parent
+  #   thumbnail.gallery_id = item.gallery_id
+  # end   
+  
+  before_thumbnail_saved do |thumbnail|
+    thumbnail.gallery_id = thumbnail.parent.gallery_id
+  end                                                
   
   def thumb(options = {})
     if self.thumbnailable?
