@@ -50,6 +50,7 @@ class GalleryExtension < Radiant::Extension
   
   def init
     Page.send(:include, PageExtensionsForGallery, GalleryTags, GalleryItemTags, GalleryItemInfoTags, GalleryLightboxTags)
+    UserActionObserver.instance
     UserActionObserver.class_eval do
       observe Gallery, GalleryItem
     end
