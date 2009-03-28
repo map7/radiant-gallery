@@ -12,7 +12,7 @@ module GalleryTags
     Usage:
     <pre><code><r:galleries:each [order='order' by='by' limit='limit' offset='offset' level='top|current|bottom|all' 
       keywords='key1,key2,key3' current_keywords='is|is_not']>...</r:galleries:each></code></pre>
-      Iterates through all galleries keywords=(manual entered keywords || current_keywords || is not current keywords)}
+      Iterates through all gallery items keywords=(manual entered keywords) and/or current_keywords=(is|is_not) }
   tag "galleries:each" do |tag|
     content = ''
     options = {}
