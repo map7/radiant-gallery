@@ -113,7 +113,7 @@ module GalleryItemTags
   tag "gallery:item:name" do |tag|      
     item = find_item(tag)     
     if tag.attr['safe']
-      item.name = item.name.gsub(/[\s]+/, '_')
+      item.name = item.name.gsub(/[\s]+/, '_').downcase
     end
     item.name
   end 
@@ -127,7 +127,7 @@ module GalleryItemTags
     item = find_item(tag)    
     joiner = tag.attr['separator'] ? tag.attr['separator'] : ' '  
     keys = item.keywords
-    keys = keys.gsub(/[\s]+/, '_') if (tag.attr['safe'])
+    keys = keys.gsub(/[\s]+/, '_').downcase if (tag.attr['safe'])
     keys.gsub(/\,/, joiner);
   end 
   
