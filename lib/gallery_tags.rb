@@ -74,7 +74,7 @@ module GalleryTags
     Selects current gallery }
   tag "gallery" do |tag|
     tag.locals.gallery = find_gallery(tag)
-    tag.expand
+    tag.expand unless tag.locals.gallery.nil? && tag.attr['fail_silently']
   end
   
   tag 'gallery:if_current' do |tag|    
