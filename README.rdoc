@@ -21,11 +21,19 @@ After tha Radiant installation you must install the attachment_fu plugin:
   
 Then install the Gallery extension:
   
+Original Gallery
   git clone git://github.com/pilu/radiant-gallery.git vendor/extensions/gallery
+
+My modifications & bug fixes
+  git clone git://github.com/map7/radiant-gallery.git vendor/extensions/gallery	
 
 Now you can run the install task:
 
   rake RAILS_ENV=production radiant:extensions:gallery:install 
+
+Make sure you install rmagick.  Here is an example of how to do that under Ubuntu
+  sudo apt-get install imagemagick libmagickcore-dev libmagickwand-dev
+  sudo gem install rmagick
 
 == Configuration
 
@@ -82,6 +90,40 @@ The value of the scope attribute could be:
 
 * gallery (default): displays images of the current gallery
 * all: displays all uploaded images
+
+
+=== Display lighthouse thumbnails
+            <!-- items -->
+            <r:gallery:item:unless_current>
+              <r:gallery:if_items>
+		<div class="gallery">            
+		  <p><r:gallery:description /></p>
+		  <r:gallery:items:each>
+                    <!-- item -->
+                    <div class="container">
+                      <div class="thumb" style="background-image: url('<r:gallery:item:thumb width="150" prefix="small" />')">
+			<a href="<r:gallery:item:thumb width="450" prefix="large" />" rel="lightbox[<r:gallery:name />]" title="<r:gallery:item:name />">
+			  <r:gallery:item:name />
+			</a>
+                      </div>
+                    </div>                
+                    <!-- end item -->
+		  </r:gallery:items:each>
+		  <div class="clearer"></div>
+		</div>
+              </r:gallery:if_items>
+            </r:gallery:item:unless_current>
+            <!-- end items -->
+
+
+=== Display full size images
+  <r:gallery id="GALLERY_ID">
+    <ul>
+      <r:gallery:items:each by="position" sort="asc">
+        <img src=<r:gallery:item:path />>
+      </r:gallery:items:each>
+    </ul>
+  </r:gallery>
   
 === The current Gallery
   
