@@ -24,8 +24,7 @@ Then install the Gallery extension:
 Original Gallery
   git clone git://github.com/pilu/radiant-gallery.git vendor/extensions/gallery
 
-My modifications & bug fixes
-  git clone git://github.com/map7/radiant-gallery.git vendor/extensions/gallery	
+Note: Change pilu over to what ever user you are cloning radiant-gallery from.
 
 Now you can run the install task:
 
